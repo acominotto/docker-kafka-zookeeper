@@ -25,7 +25,9 @@ if [ ! -z "$ADVERTISED_HOST" ]; then
 fi
 if [ ! -z "$ADVERTISED_PORT" ]; then
     echo "advertised port: $ADVERTISED_PORT"
+    sed -r -i "s/^(#)(listeners)=(.*):(.*)/\2=\3:$ADVERTISED_PORT/g" $KAFKA_HOME/config/server.properties
     sed -r -i "s/#(advertised.port)=(.*)/\1=$ADVERTISED_PORT/g" $KAFKA_HOME/config/server.properties
+    sed -r -i "s/advertised.listeners=(.*):(.*)/advertised.listeners=\1:$ADVERTISED_PORT/g" $KAFKA_HOME/config/server.properties
 fi
 
 # Set the zookeeper chroot
