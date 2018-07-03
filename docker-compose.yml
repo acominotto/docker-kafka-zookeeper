@@ -1,0 +1,17 @@
+version: '3'
+services:
+  kafky:
+    image: grinn/kafka-zookeeper:local
+    build: 
+      context: .
+      args: 
+        - ZOOKEEPER_VERSION=3.4.12
+        - SCALA_VERSION=2.12
+        - KAFKA_VERSION=1.1.0
+    ports:
+      - 9093:9093
+      - 2181:2181
+    environment:
+      - ADVERTISED_HOST=127.0.0.1
+      - ADVERTISED_PORT=9093
+      - AUTO_CREATE_TOPICS=true
